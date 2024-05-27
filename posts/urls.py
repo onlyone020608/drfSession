@@ -18,4 +18,5 @@ urlpatterns = [
     # path('createOrlist/byGeneric/', PostListCreateGeneric.as_view()),
     path('', include(router.urls)),
     path('api/posts/list', PostListView.as_view(), name='post-list'),
+    path('api/posts/list', CommentCreateView.as_view(), name='comment'),
 ]

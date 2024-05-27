@@ -91,13 +91,7 @@ class CommentCreateView(APIView):
     def post(self, request):
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
-            post = get_object_or_404(Post, id=request.data['post'])
-            writer = get_object_or_404(User, id=request.data['writer'])
-            comment = Comment.objects.create(
-                content=request.data['content'],
-                post=post,
-                writer=writer
-            )
+            serializer.save();
             response_serializer = CommentSerializer(comment)
             return Response(response_serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
